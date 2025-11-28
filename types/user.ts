@@ -1,26 +1,34 @@
-type Geo = {
+import { ReactNode } from "react"
+
+type TGeo = {
     lat: string
     lng: string
 }
 
-type Address = {
+type TAddress = {
     street: string
     suite: string
     city: string
     zipcode: string
-    geo: Geo
+    geo: TGeo
 }
 
-type Company = {
+type TCompany = {
     bs: string
     catchPhrase: string
     name: string
 }
 
-export interface User{
+export type TUserTable = {
+    name: string
+    width: number
+    icons: ReactNode
+}
+
+export interface IUser{
     id: number
-    address: Address
-    company: Company
+    address: TAddress
+    company: TCompany
     email: string
     name: string
     phone: string
