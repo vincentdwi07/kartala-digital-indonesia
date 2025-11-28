@@ -16,10 +16,14 @@ const SearchIconMemoized = React.memo(SearchIconContent)
 
 export default function SearchBar(props: SearchBarProps){
     const [searchValue, setSearchValue] = useState(() => {
-        const localSearchValue = localStorage.getItem("search-value") || "";
-        props.onSearch(localSearchValue)
+        if (typeof window !== "undefined"){
+            const localSearchValue = localStorage.getItem("search-value") || "";
+            props.onSearch(localSearchValue)
+            return localSearchValue
+        }else{
+            return ""
+        }
 
-        return localSearchValue
     });
 
     const handleSearchValue = (e: ChangeEvent<HTMLInputElement>) => {

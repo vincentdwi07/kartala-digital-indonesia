@@ -15,19 +15,26 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { IoLocationSharp } from "react-icons/io5";
 import { FaBuilding } from "react-icons/fa6";
 import { FiTarget } from "react-icons/fi";
+import React from "react";
+
+const TheadData: TUserTable[] = [
+    {name: "Full Name", width: 25, icons: <BsPersonFill/>}, 
+    {name: "Email", width: 25, icons: <MdOutlineAlternateEmail/>},
+    {name: "City", width: 15, icons: <IoLocationSharp/>},
+    {name: "Company Name", width: 25, icons: <FaBuilding/>},
+    {name: "Action", width: 10, icons: <FiTarget/>}
+]
+
+const DetailButtonMemoized = React.memo(DetailButton)
+
+DetailButtonMemoized.displayName = "DetailButtonMemoized"
 
 export default function UserTable(){
     const [user, setUser] = useState<IUser[]>([])
     const [search, setSearch] = useState("")
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null) 
-    const theadData: TUserTable[] = [
-        {name: "Full Name", width: 25, icons: <BsPersonFill/>}, 
-        {name: "Email", width: 25, icons: <MdOutlineAlternateEmail/>},
-        {name: "City", width: 15, icons: <IoLocationSharp/>},
-        {name: "Company Name", width: 25, icons: <FaBuilding/>},
-        {name: "Action", width: 10, icons: <FiTarget/>}
-    ]
+
 
     const handleSearch = (text: string) => {
         setSearch(text)
@@ -80,10 +87,10 @@ export default function UserTable(){
             <table className="rounded-md w-full border-collapse">
                 <thead className="border-t border-b border-gray-200 text-sm bg-gray-50">
                     <tr>
-                        {theadData.map((item, index) => (
+                        {TheadData.map((item, index) => (
                             <th 
                                 key={index}
-                                className={`text-sm px-3 py-2 border-r border-gray-200 text-gray-500 ${index === theadData.length - 1 && "border-r-0"}`}
+                                className={`text-sm px-3 py-2 border-r border-gray-200 text-gray-500 ${index === TheadData.length - 1 && "border-r-0"}`}
                                 style={{ width: `${item.width}%`, fontWeight: "500" }}
                             >
                                 <div className="flex gap-2 items-center">
@@ -100,7 +107,7 @@ export default function UserTable(){
                 ) : error ? (
                     <tbody>
                         <tr>
-                            <td colSpan={theadData.length} className="text-center">
+                            <td colSpan={TheadData.length} className="text-center">
                                 <div className="p-40 text-red-500 text-lg flex flex-col items-center gap-3">
                                     <Image 
                                         loading="lazy"
@@ -123,7 +130,7 @@ export default function UserTable(){
                     >
                         {filtereddUser.length === 0 && search !== "" ? (
                             <tr>
-                                <td colSpan={theadData.length} className="text-center">
+                                <td colSpan={TheadData.length} className="text-center">
                                     <div className="p-40 text-gray-400 text-lg flex flex-col items-center gap-3 ">
                                         <Image 
                                             loading="lazy"
@@ -136,17 +143,19 @@ export default function UserTable(){
                                 </td>
                             </tr>
                         ) : (
-                            filtereddUser.map((item, index) => (
+                            filtereddUser.map((item) => (
                                 <tr
                                     className="border-b border-gray-200"
-                                    key={index}
+                                    key={item.id}
                                 >
                                     <td className="border-r border-gray-200 p-1 px-3 font-semibold" style={{ width: `25%` }}>{item.name}</td>
                                     <td className="border-r border-gray-200 p-1 px-3 underline text-gray-600" style={{ width: `25%` }}>{item.email}</td>
                                     <td className="border-r border-gray-200 p-1 px-3 text-gray-600" style={{ width: `15%` }}>{item.address?.city}</td>
                                     <td className="border-r border-gray-200 p-1 px-3 text-gray-600" style={{ width: `25%` }}>{item.company?.name}</td>
                                     <td className="p-1.5 px-3 text-center" style={{ width: `10%` }}>
-                                        <DetailButton/>
+                                        <DetailButtonMemoized
+                                            userId={item.id.toString()}
+                                        />
                                     </td>
                                 </tr>
                             ))

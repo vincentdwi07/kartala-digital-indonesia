@@ -9,3 +9,13 @@ export async function FetchAllUser(){
         throw new Error("Error when fetching user data")
     }
 }
+
+export async function FetchUserByID(id: string){
+    try{
+        const response = await axiosInstance.get(`/users/${id}`)
+        return response
+    }catch(error){
+        console.error("Error when fetching user by id", error)
+        throw new Error("Error when fetching user data")
+    }
+}
