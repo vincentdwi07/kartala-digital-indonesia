@@ -1,4 +1,3 @@
-// UserTable.tsx
 "use client"
 
 import SearchBar from "./SearchBar";
@@ -9,20 +8,19 @@ import ErrorImage from "../../public/img/error.png"
 import DataNull from "../../public/img/data_null.png"
 
 import { FetchAllUser } from "@/services/api/userAPI";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import type { IUser, TUserTable } from "@/types/user";
 import { BsPersonFill } from "react-icons/bs";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { IoLocationSharp } from "react-icons/io5";
 import { FaBuilding } from "react-icons/fa6";
 import { FiTarget } from "react-icons/fi";
-import { FaUserXmark } from "react-icons/fa6";
 
 export default function UserTable(){
     const [user, setUser] = useState<IUser[]>([])
     const [search, setSearch] = useState("")
     const [loading, setLoading] = useState(true)
-    const [error, setError] = useState<string | null>(null) // Tipe sudah benar: string | null
+    const [error, setError] = useState<string | null>(null) 
     const theadData: TUserTable[] = [
         {name: "Full Name", width: 25, icons: <BsPersonFill/>}, 
         {name: "Email", width: 25, icons: <MdOutlineAlternateEmail/>},
@@ -31,8 +29,8 @@ export default function UserTable(){
         {name: "Action", width: 10, icons: <FiTarget/>}
     ]
 
-    const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-        setSearch(e.target.value)
+    const handleSearch = (text: string) => {
+        setSearch(text)
     }
 
     const filtereddUser: IUser[] = user.filter((user) => 
@@ -75,7 +73,7 @@ export default function UserTable(){
 
             <div className="mb-3 w-full flex justify-start">
                 <SearchBar
-                    onSearch={(e) => handleSearch(e)}
+                    onSearch={handleSearch}
                 />
             </div>
 
