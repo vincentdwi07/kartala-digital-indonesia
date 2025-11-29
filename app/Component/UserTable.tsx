@@ -74,7 +74,7 @@ export default function UserTable(){
                     User Data
                 </h1>
                 <div className="bg-gray-200 text-gray-500 text-sm font-semibold rounded-lg px-3 py-0 flex justify-center items-center h-7">
-                    {user.length}
+                    {filtereddUser.length}
                 </div>
             </div>
 
