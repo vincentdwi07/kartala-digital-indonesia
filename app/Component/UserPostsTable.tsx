@@ -76,19 +76,19 @@ export default function UserPostsTable(props: UserPostsTableProps){
                                     key={item.id} 
                                 >
                                     <td 
-                                        className="border-r border-gray-200 p-2 text-center text-gray-600" 
+                                        className="border-r border-gray-200 p-2 text-center text-gray-600 text-xs lg:text-sm" 
                                         style={{ minWidth: THeadPostTable[0].minWidth }}
                                     >
                                         {index + 1}
                                     </td>
                                     <td 
-                                        className="border-r border-gray-200 p-2 text-gray-700 font-medium whitespace-nowrap xl:whitespace-break-spaces" 
+                                        className="border-r border-gray-200 p-2 text-gray-700 font-medium whitespace-nowrap text-xs lg:text-sm xl:whitespace-break-spaces" 
                                         style={{ minWidth: THeadPostTable[1].minWidth }}
                                     >
                                         {item.title}
                                     </td>
                                     <td 
-                                        className="border-r border-gray-200 p-2 text-gray-600 " 
+                                        className="border-r border-gray-200 p-2 text-gray-600 text-xs lg:text-sm" 
                                         style={{ minWidth: THeadPostTable[2].minWidth }}
                                     >
                                         {item.body}

@@ -40,7 +40,7 @@ export default function SearchBar(props: SearchBarProps){
     }, [searchValue, props]);
 
     return(
-        <div className="flex gap-1 items-center px-3 py-2 border border-gray-300 rounded-md">
+        <div className="flex gap-1 items-center px-3 py-2 border border-gray-300 rounded-md w-full md:w-auto">
             <SearchIconMemoized/>
             <input 
                 type="text"
