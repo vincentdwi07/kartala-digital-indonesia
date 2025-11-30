@@ -68,7 +68,7 @@ export default function UserTable(){
         getAllUser()
     }, [])  
 
-    return (
+       return (
         <>
             <div className="flex items-center gap-3 mb-5">
                 <h1 className="font-semibold text-3xl">
@@ -85,88 +85,90 @@ export default function UserTable(){
                 />
             </div>
 
-            <table className="rounded-md w-full border-collapse">
-                <thead className="border-t border-b border-gray-200 text-sm bg-gray-50">
-                    <tr>
-                        {TheadData.map((item, index) => (
-                            <th 
-                                key={index}
-                                className={`text-sm px-3 py-2 border-r border-gray-200 text-gray-500 ${index === TheadData.length - 1 && "border-r-0"}`}
-                                style={{ width: `${item.width}%`, fontWeight: "500" }}
-                            >
-                                <div className="flex gap-2 items-center">
-                                    {item.icons}
-                                    <p>{item.name}</p>
-                                </div>
-                            </th>
-                        ))}
-                    </tr>
-                </thead>
-                
-                {loading ? (
-                    <UserTableSkeleton
-                        rows={10}
-                        cols={5}
-                    />
-                ) : error ? (
-                    <tbody>
+            <div className="w-full overflow-x-auto">
+                <table className="rounded-md w-full border-collapse">
+                    <thead className="border-t border-b border-gray-200 text-sm bg-gray-50">
                         <tr>
-                            <td colSpan={TheadData.length} className="text-center">
-                                <div className="p-40 text-red-500 text-lg flex flex-col items-center gap-3">
-                                    <Image 
-                                        loading="lazy"
-                                        height={100}
-                                        src={ErrorImage} alt="" 
-                                        className="opacity-50 filter:"
-                                    />
-                                    <p>{error}</p> 
-                                    <ButtonGeneral
-                                        content="Retry"
-                                        onClick={() => getAllUser()}
-                                    ></ButtonGeneral>
-                                </div>
-                            </td>
+                            {TheadData.map((item, index) => (
+                                <th 
+                                    key={index}
+                                    className={`text-sm px-3 py-2 border-r border-gray-200 text-gray-500 ${index === TheadData.length - 1 && "border-r-0"}`}
+                                    style={{ width: `${item.width}%`, fontWeight: "500", minWidth: index < TheadData.length - 1 ? '120px' : 'auto' }} 
+                                >
+                                    <div className="flex gap-2 items-center whitespace-nowrap"> 
+                                        {item.icons}
+                                        <p>{item.name}</p>
+                                    </div>
+                                </th>
+                            ))}
                         </tr>
-                    </tbody>
-                ) : (
-                    <tbody
-                        className="relative"
-                    >
-                        {filtereddUser.length === 0 && search !== "" ? (
+                    </thead>
+                    
+                    {loading ? (
+                        <UserTableSkeleton
+                            rows={10}
+                            cols={5}
+                        />
+                    ) : error ? (
+                        <tbody>
                             <tr>
                                 <td colSpan={TheadData.length} className="text-center">
-                                    <div className="p-40 text-gray-400 text-lg flex flex-col items-center gap-3 ">
+                                    <div className="p-40 text-red-500 text-lg flex flex-col items-center gap-3">
                                         <Image 
                                             loading="lazy"
                                             height={100}
-                                            src={DataNull} alt="" 
-                                            className="opacity-50"
+                                            src={ErrorImage} alt="" 
+                                            className="opacity-50 filter:"
                                         />
-                                        <p>User not found</p>
+                                        <p>{error}</p> 
+                                        <ButtonGeneral
+                                            content="Retry"
+                                            onClick={() => getAllUser()}
+                                        ></ButtonGeneral>
                                     </div>
                                 </td>
                             </tr>
-                        ) : (
-                            filtereddUser.map((item) => (
-                                <tr
-                                    className="border-b border-gray-200"
-                                    key={item.id}
-                                >
-                                    <td className="border-r border-gray-200 p-1 px-3 font-semibold" style={{ width: `25%` }}>{item.name}</td>
-                                    <td className="border-r border-gray-200 p-1 px-3 underline text-gray-600" style={{ width: `25%` }}>{item.email}</td>
-                                    <td className="border-r border-gray-200 p-1 px-3 text-gray-600" style={{ width: `15%` }}>{item.address?.city}</td>
-                                    <td className="border-r border-gray-200 p-1 px-3 text-gray-600" style={{ width: `25%` }}>{item.company?.name}</td>
-                                    <td className="p-1.5 px-3 text-center" style={{ width: `10%` }}>
-                                        <DetailButtonMemoized
-                                            userId={item.id.toString()}
-                                        />
+                        </tbody>
+                    ) : (
+                        <tbody
+                            className="relative"
+                        >
+                            {filtereddUser.length === 0 && search !== "" ? (
+                                <tr>
+                                    <td colSpan={TheadData.length} className="text-center">
+                                        <div className="p-40 text-gray-400 text-lg flex flex-col items-center gap-3 ">
+                                            <Image 
+                                                loading="lazy"
+                                                height={100}
+                                                src={DataNull} alt="" 
+                                                className="opacity-50"
+                                            />
+                                            <p>User not found</p>
+                                        </div>
                                     </td>
                                 </tr>
-                            ))
-                        )}
-                    </tbody>
-                )}
-            </table>
+                            ) : (
+                                filtereddUser.map((item) => (
+                                    <tr
+                                        className="border-b border-gray-200"
+                                        key={item.id}
+                                    >
+                                        <td className="border-r border-gray-200 p-1 px-3 font-semibold whitespace-nowrap" style={{ width: `25%` }}>{item.name}</td>
+                                        <td className="border-r border-gray-200 p-1 px-3 underline text-gray-600 whitespace-nowrap" style={{ width: `25%` }}>{item.email}</td>
+                                        <td className="border-r border-gray-200 p-1 px-3 text-gray-600 whitespace-nowrap" style={{ width: `15%` }}>{item.address?.city}</td>
+                                        <td className="border-r border-gray-200 p-1 px-3 text-gray-600 whitespace-nowrap" style={{ width: `25%` }}>{item.company?.name}</td>
+                                        <td className="p-1.5 px-3 text-center" style={{ width: `10%` }}>
+                                            <DetailButtonMemoized
+                                                userId={item.id.toString()}
+                                            />
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    )}
+                </table>
+            </div>
         </>  
     );
 }
