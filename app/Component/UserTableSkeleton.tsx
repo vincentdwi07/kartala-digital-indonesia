@@ -1,11 +1,16 @@
-export default function UserTableSkeleton(){
+interface UserTableSkeletonProps{
+    rows: number,
+    cols: number
+}
+
+export default function UserTableSkeleton(props: UserTableSkeletonProps){
     return(
         <tbody>
-            {Array.from({length: 10}, (_, index:number) => (
+            {Array.from({length: props.rows}, (_, index:number) => (
                 <tr
                     key={index}
                 >
-                    {Array.from({length: 5}, (_, index:number) => (
+                    {Array.from({length: props.cols}, (_, index:number) => (
                         <td 
                             key={index}
                             className="p-3"

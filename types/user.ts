@@ -19,6 +19,13 @@ type TCompany = {
     name: string
 }
 
+export type TUserPosts = {
+    userId: number,
+    id: number,
+    title: string,
+    body: string
+}
+
 export type TUserTable = {
     name: string
     width: number

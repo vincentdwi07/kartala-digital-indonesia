@@ -14,7 +14,7 @@ export default function Breadcrumbs(props: BreadcrumbsProps){
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const getUserById = async  (userId: string) => {
+        const getUserById = async (userId: string) => {
             const response = await FetchUserByID(userId)
             setUser(response?.data || null)
             setLoading(false)

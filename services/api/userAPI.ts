@@ -26,3 +26,19 @@ export async function FetchUserByID(id: string){
         throw new Error("Error when fetching user data")
     }
 }
+
+export async function FetchUserPostsByID(id: string){
+    try{
+        const response = await axiosInstance.get(`/users/${id}/posts`)
+        return response
+    }catch(error){
+        const axiosError = error as AxiosError
+
+        if(axiosError.response && axiosError.response.status === 404){
+            return null
+        }
+
+        console.error("Error when fetching user by id", error)
+        throw new Error("Error when fetching user data")
+    }
+}

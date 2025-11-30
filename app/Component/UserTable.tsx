@@ -15,6 +15,7 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { IoLocationSharp } from "react-icons/io5";
 import { FaBuilding } from "react-icons/fa6";
 import { FiTarget } from "react-icons/fi";
+import ButtonGeneral from "./ButtonGeneral";
 import React from "react";
 
 const TheadData: TUserTable[] = [
@@ -103,7 +104,10 @@ export default function UserTable(){
                 </thead>
                 
                 {loading ? (
-                    <UserTableSkeleton/>
+                    <UserTableSkeleton
+                        rows={10}
+                        cols={5}
+                    />
                 ) : error ? (
                     <tbody>
                         <tr>
@@ -116,10 +120,10 @@ export default function UserTable(){
                                         className="opacity-50 filter:"
                                     />
                                     <p>{error}</p> 
-                                    <button
-                                        className="cursor-pointer border border-gray-300 px-10 p-1 rounded-md text-gray-600 hover:bg-gray-700 hover:text-white transition-all duration-300"
+                                    <ButtonGeneral
+                                        content="Retry"
                                         onClick={() => getAllUser()}
-                                    >Retry</button>
+                                    ></ButtonGeneral>
                                 </div>
                             </td>
                         </tr>
