@@ -42,7 +42,7 @@ export default function UserDetailComponent(props: UserDetailComponentProps){
     }
 
     if(user === null && !loading) {
-        return(        
+        return(
             <div className="absolute h-screen w-full left-0 top-0 flex flex-col gap-3 items-center justify-center">
                 <Image
                     src={DataNullImage}
@@ -105,7 +105,7 @@ export default function UserDetailComponent(props: UserDetailComponentProps){
                     
                     <div className="w-full xl:w-1/3 bg-gray-100 p-10 rounded-md sticky top-5 min-h-[150px] max-h-[200px] hidden xl:block">
                         <h1 className="font-semibold mb-5">Public Profile</h1>
-                        <div className="flex justify-between border-gray-300">
+                        <div className="flex justify-between gap-3 border-gray-300">
                             <p className="text-gray-400">Email</p>
                             <p className="text-gray-600">{user?.email}</p>
                         </div>

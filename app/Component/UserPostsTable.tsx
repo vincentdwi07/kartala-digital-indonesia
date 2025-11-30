@@ -46,7 +46,7 @@ export default function UserPostsTable(props: UserPostsTableProps){
                         {THeadPostTable.map((item, index) => (
                             <th
                                 key={item.name} 
-                                className={`text-sm text-start px-3 py-2 border-r border-gray-200 text-gray-500 font-medium ${index === THeadPostTable.length - 1 ? "border-r-0" : ""}`}
+                                className={`text-sm text-start px-2 py-2 border-r border-gray-200 text-gray-500 font-medium ${index === THeadPostTable.length - 1 ? "border-r-0" : ""}`}
                                 style={{ width: `${item.width}%`, minWidth: item.minWidth }}
                             >
                                 <p className="whitespace-nowrap">{item.name}</p> 
